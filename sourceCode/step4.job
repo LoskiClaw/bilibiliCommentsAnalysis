@@ -1,4 +1,0 @@
-#step4
-type=command
-dependencies=step3
-command=sh gen_rpt.sh
