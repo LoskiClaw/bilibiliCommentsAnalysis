@@ -1,0 +1,4 @@
+#step2
+type=command
+dependencies=step1
+command=sh sqoop2dfs.sh

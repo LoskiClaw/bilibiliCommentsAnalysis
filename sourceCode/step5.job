@@ -1,0 +1,4 @@
+#step5
+type=command
+dependencies=step4
+command=sh sqoop2mysql.sh

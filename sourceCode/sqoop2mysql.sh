@@ -1,0 +1,4 @@
+d=$(date +%y%m%d)
+sqoop export --connect 'jdbc:mysql://hadoop2:3306/rpv_list?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true' --username root --password Loski@2000 --table day_count_list --fields-terminated-by '\t' --export-dir /hive/warehouse/mydb.db/day_count_list/dt=${d} -m 1;
+sqoop export --connect 'jdbc:mysql://hadoop2:3306/rpv_list?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true' --username root --password Loski@2000 --table usr_rank_list --fields-terminated-by '\t' --export-dir /hive/warehouse/mydb.db/usr_rank_list/dt=${d} -m 1;
+sqoop export --connect 'jdbc:mysql://hadoop2:3306/rpv_list?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true' --username root --password Loski@2000 --table comment_list --fields-terminated-by '\t' --export-dir /hive/warehouse/mydb.db/comment_list/dt=${d} -m 1;

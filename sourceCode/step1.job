@@ -1,0 +1,3 @@
+#step1
+type=command
+command=hive -f create_tables.sql

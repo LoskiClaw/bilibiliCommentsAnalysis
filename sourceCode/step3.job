@@ -1,0 +1,4 @@
+#step3
+type=command
+dependencies=step2
+command=sh load_data.sh
