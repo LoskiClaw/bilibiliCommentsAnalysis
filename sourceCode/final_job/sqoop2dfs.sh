@@ -1,0 +1,4 @@
+sqoop import --connect 'jdbc:mysql://192.168.0.103:3306/bilicomments?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true' --username root --password loski2000 --table bilicomment --fields-terminated-by '\t' -m 1;
+sqoop import --connect 'jdbc:mysql://192.168.0.103:3306/bilicomments?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true' --username root --password loski2000 --table biliusrinfo --fields-terminated-by '\t' -m 1;
+sqoop import --connect 'jdbc:mysql://192.168.0.103:3306/bilicomments?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true' --username root --password loski2000 --table usr_rank_list --fields-terminated-by '\t' -m 1;
+sqoop import --connect 'jdbc:mysql://192.168.0.103:3306/bilicomments?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true' --username root --password loski2000 --table day_count_list --fields-terminated-by '\t' -m 1;
