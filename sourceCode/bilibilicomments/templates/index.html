@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>B站评论分析平台</title>
+	<!--<link rel="stylesheet" href="../static/css/bootstrap.min.css" />-->
+	<script type="text/javascript" src="../static/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../static/js/echarts.min.js"></script>
+	<!--<script type="text/javascript" src="../static/js/china.js"></script>-->
+	<script type="text/javascript">
+		$.ajaxSetup({
+			error: function () {
+				alert("从服务器获取数据失败");
+			}
+		});
+	</script>
+	<style type="text/css">
+		#mainpane {
+			margin: auto;
+			background: aqua;
+		}
+
+		.container-fluid {
+			margin: auto;
+		}
+
+		#main1 {
+			width: 40%;
+			height: 50%;
+			position: absolute;
+			float: left;
+			left: 5%;
+			top: 20%;
+		}
+
+		#main2 {
+			width:  40%;
+			height: 50%;
+			margin-right: 10%;
+			position: absolute;
+			color: beige;
+			float: left;
+			left: 55%;
+			top: 20%;
+		}
+
+		#box {
+			width: 300px;
+			height: 100px;
+			position: absolute;
+			color: beige;
+			overflow: hidden;
+		}
+
+
+		#main3 {
+			width: 40%;
+			height: 20%;
+			position: absolute;
+			color: beige;
+			float: left;
+			left: 5%;
+			top: 65%;
+			overflow: hidden;
+		}
+
+		#main4 {
+			width: 60%
+			height: 50%;
+			margin: auto;
+			position: absolute;
+			color: beige;
+			float: left;
+			left: 55%;
+			top: 75%;
+		}
+
+		#main5 {
+			width: 20%
+			height: 30%;
+			margin: auto;
+			position: absolute;
+			color: beige;
+			float: left;
+			left: 35%;
+			top: 80%;
+		}
+
+		.butt{
+			color: rgb(214, 207, 221);
+			background-color: #1976be;
+			height:30px;
+			width:200px;
+			font-size:large;
+			vertical-align: middle;
+			border-radius: 10px;
+		}
+		.butt:hover{
+			background-color: burlywood;
+		}
+	</style>
+</head>
+
+<body style="background-size:400% 600%;background: url(../static/image/background1.jpg) no-repeat;">
+	<div class="container-fluid">
+		<h1 style="color:white">B站评论分析平台</h1>
+
+		<div id="mainpane">
+			<button id="b1">今天</button>
+			<button id="b2">昨天</button>
+			<button id="b3">一周内</button>
+			<span id="time"></span>
+		</div>
+
+		<div class="row">
+			<!--1.-->
+			<div id='main1' class="col-xs-12 col-md-7 ">
+			</div>
+
+			<!--2.-->
+			<div id='main2' class="col-xs-12 col-md-4  "></div>
+
+			<!--3.-->
+
+			<!--4.-->
+			<div id="main4">
+			<table border="1" bordercolor="#1d1d1d">
+				<caption>用户获赞排名</caption>
+				<tr bgcolor="#005d61">
+					<th width="100" height="20" >排名</th>
+					<th width="100" height="20">用户名</th>
+					<th width="40" height="20">等级</th>
+					<th width="40" height="20">性别</th>
+					<th width="100" height="20">获赞数</th>
+				</tr>
+				{% for user in users %}
+				<tr bgcolor="#2fe300">
+					<td height="20">{{user[0]}}</td>
+					<td height="20">{{user[1]}}</td>
+					<td height="20">{{user[2]}}</td>
+					<td height="20">{{user[3]}}</td>
+					<td height="20">{{user[4]}}</td>
+				</tr>
+				{% endfor %}
+			</table>
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+		var myChart1 = echarts.init(document.getElementById('main1'));
+		var option1 = {
+			title: {
+				text: '情感分类饼状图',
+				left: 'center',
+				textStyle:{
+					color: '#ffffff'
+				}
+			},
+			tooltip: {
+				trigger: 'item'
+			},
+			legend: {
+				orient: 'vertical',
+				left: 'left'
+			},
+			series: [
+				{
+					name: '情感',
+					type: 'pie',
+					radius: '50%',
+					data: [
+						{ value: {{ emoanalyselist[0] }}, name: '平和'},
+						{ value: {{ emoanalyselist[1] }}, name: '积极'},
+						{ value: {{ emoanalyselist[2] }}, name: '消极'}
+              		 ],
+				emphasis: {
+					itemStyle: {
+						shadowBlur: 10,
+						shadowOffsetX: 0,
+						shadowColor: 'rgba(1, 0.5, 0, 0.5)'
+						}
+					}
+				}
+			]
+		};
+		document.getElementById("main1").style.fontFamily = "Arial";
+		myChart1.setOption(option1);
+	</script>
+	<script>
+		/*2.*/
+		var myChart2 = echarts.init(document.getElementById('main2'));
+		var xDataArr = {{ daycountlist[0]|tojson}};
+		var yDataArr = {{ daycountlist[1]}};
+		var yDataArr2 = {{ daycountlist[2]}};
+		// 指定图表的配置项和数据
+		var option2 = {
+			color: ['#4472C5', '#ED7C30', '#80FF80', '#FF8096', '#800080'],
+			title: {
+				text: '评论点赞图',
+				textStyle: {
+					color: "white"
+				},
+				left: "40%",
+			},
+			legend: {
+				data: ['评论数', '点赞数'],
+				type: 'plain',
+				left: '80%',
+				itemWidth: 20,
+				itemHeight: 10,
+				textStyle: {//图例文字的样式
+					color: 'white',
+					fontSize: 12
+				}
+			},
+			tooltip: {
+				trigger: 'axis',
+				axisPointer: {
+					type: 'cross',
+					label: {
+						backgroundColor: '#6a7985'
+					}
+				}
+			},
+			grid: {
+				left: '1%',
+				right: '1%',
+				bottom: '0%',
+				containLabel: true
+			},
+			xAxis: {
+				name: "时间",
+				boundaryGap: false,
+				data: xDataArr,
+				axisLabel: {
+					textStyle: {
+						color: '#7edae8',  //坐标的字体颜色
+					},
+				},
+			},
+			yAxis: {
+				type: 'value',
+				axisLabel: {
+					textStyle: {
+						color: '#7edae8',  //坐标的字体颜色
+					},
+				},
+			},
+			series: [{
+				name: '评论数',
+				type: 'line',
+				markLine: {
+					data: [
+						{
+							type: 'average',
+							name: '平均值'
+						}]
+				},
+				label: {
+					show: true,
+					position: 'top'
+				},
+				data: yDataArr,
+				smooth: true,
+				areaStyle: {
+					color: "red"
+				}
+			},
+			{
+				name: '点赞数',
+				type: 'line',
+				markLine: {
+					data: [
+						{
+							type: 'average',
+							name: '平均值'
+						}]
+				},
+				label: {
+					show: true,
+					position: 'top'
+				},
+				data: yDataArr2,
+				smooth: true,
+				areaStyle: {
+					color: "pink"
+				}
+			}],
+		};
+		myChart2.setOption(option2);
+	</script>
+
+	<div id='main3'>
+		<h2>用户评论</h2>
+		<div id="box">
+		<ul id="ul1">
+			{% for comment in comments %}
+			<li>{{comment[0]}} {{comment[1]}}</li>
+			{% endfor %}
+		</ul>
+		<ul id="ul2"></ul>
+		<script>
+			window.onload = roll(50);
+
+			function roll(t) {
+				var ul1 = document.getElementById("ul1");
+				var ul2 = document.getElementById("ul2");
+				var box = document.getElementById("box");
+				ul2.innerHTML = ul1.innerHTML;
+				box.scrollTop = 0;
+				var timer = setInterval(rollStart, t);
+				box.onmouseover = function () {
+					clearInterval(timer)
+				}
+				box.onmouseout = function () {
+					timer = setInterval(rollStart, t);
+				}
+			}
+
+			function rollStart() {
+				if (box.scrollTop >= ul1.scrollHeight) {
+					box.scrollTop = 0;
+				} else {
+					box.scrollTop++;
+				}
+			}
+		</script>
+		</div>
+	</div>
+	<div id='main5'>
+		<div class="butt">
+			<button class="butt" onclick="window.location.href='/templates/wordcloud.html'">
+				<strong>点击查看词云</strong>
+			</button>
+		</div>
+	</div>
+</body>
+
+</html>
