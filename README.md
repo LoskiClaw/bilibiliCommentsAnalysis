@@ -1,9 +1,9 @@
 # bilibiliCommentsAnalysis
-ZZU绝对不出bug 队的生产实习项目
-1、bilibilicomments文件夹内是网页代码以及情感分析、生成词云的python代码
-2、Spider-BiliComUsr-master文件夹内python代码内是爬取B站视频评论的网络爬虫代码
-3、final_job文件夹内的job和脚本文件是hadoop集群的操作脚本和Azkaban进行作业调度的工作流调度
-数据库导出在sql文件夹内
-以bilicomments后缀的部署在本地mysql上
-以rpv_list后缀的部署在hadoop2上的mysql上
+## ZZU绝对不出bug 队的生产实习项目
+1、bilibilicomments文件夹内是网页代码以及情感分析、生成词云的python代码\
+2、Spider-BiliComUsr-master文件夹内python代码内是爬取B站视频评论的网络爬虫代码\
+3、final_job文件夹内的job和脚本文件是hadoop集群的操作脚本和Azkaban进行作业调度的工作流调度\
+数据库导出在sql文件夹内\
+以bilicomments后缀的部署在本地mysql上\
+以rpv_list后缀的部署在hadoop2上的mysql上\
 temp.txt是对爬取到的数据做的去除回车换行符的操作，以及创建rpt应用表的一些操作。
