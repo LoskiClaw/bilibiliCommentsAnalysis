@@ -1,0 +1,24 @@
+update bilicomment set sign = replace (sign, char(10), " ");
+update bilicomment set sign = replace (sign, char(13), "");
+update bilicomment set message = replace (message, char(10), " ");
+update bilicomment set message = replace (message, char(13), "");
+
+
+insert into usr_rank_list
+select
+ROW_NUMBER() over (order by b2.likehah desc) as usr_rank,
+b1.name as usrname,
+level as usrlevel,
+b1.sex as usrsex,
+likehah as usrlikes
+from biliusrinfo b1, bilicomment b2 
+where b1.name = b2.uname
+order by usrlikes desc;
+
+insert into day_count_list
+select
+substring(ctime,1,10) as daytime,
+count(substring(ctime,1,10)) as countnum
+from bilicomment
+group by daytime
+order by daytime;
