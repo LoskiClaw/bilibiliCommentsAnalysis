@@ -29,7 +29,7 @@ def login():
             host='192.168.71.112',
             port=3306,
             user='root',
-            passwd='Loski@2000',
+            passwd='',
             db='rpv_list',
             charset='utf8'
         )
