@@ -134,7 +134,7 @@ def insertIntoDataBase(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10):
 
 
     # 打开数据库连接
-    db = pymysql.connect(host = "127.0.0.1", port = 3306, user = "root", password = "loski2000", database = comDataBaseName, charset='utf8mb4')
+    db = pymysql.connect(host = "127.0.0.1", port = 3306, user = "root", password = "", database = comDataBaseName, charset='utf8mb4')
 
     # 使用cursor()方法获取操作游标
     cursor = db.cursor()
@@ -176,7 +176,7 @@ def checkMid(mid):
     :param mid:
     :return:
     """
-    db = pymysql.connect(host = "127.0.0.1", port = 3306, user = "root", password = "loski2000", database = comDataBaseName, charset='utf8mb4')
+    db = pymysql.connect(host = "127.0.0.1", port = 3306, user = "root", password = "", database = comDataBaseName, charset='utf8mb4')
 
     # 使用cursor()方法获取操作游标
     cursor = db.cursor()
