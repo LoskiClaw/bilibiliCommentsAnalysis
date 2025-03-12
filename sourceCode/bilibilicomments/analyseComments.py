@@ -12,7 +12,7 @@ con = pymysql.connect(
     host='127.0.0.1',
     port=3306,
     user='root',
-    passwd='loski2000',
+    passwd='',
     db='bilicomments',
     charset='utf8'
 )
@@ -52,7 +52,7 @@ con = pymysql.connect(
     host='192.168.71.112',
     port=3306,
     user='root',
-    passwd='Loski@2000',
+    passwd='',
     db='rpv_list',
     charset='utf8'
 )
