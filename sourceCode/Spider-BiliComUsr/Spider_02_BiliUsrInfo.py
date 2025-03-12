@@ -205,7 +205,7 @@ def parserText(response):
 
 def insertIntoDataBase(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21):
     # 打开数据库连接
-    db = pymysql.connect(host = "127.0.0.1", port = 3306, user = "root", password = "loski2000", database = usrInfoDataBaseName, charset='utf8')
+    db = pymysql.connect(host = "127.0.0.1", port = 3306, user = "root", password = "", database = usrInfoDataBaseName, charset='utf8')
 
     # 使用cursor()方法获取操作游标
     cursor = db.cursor()
